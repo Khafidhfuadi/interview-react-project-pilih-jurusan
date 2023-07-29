@@ -122,6 +122,35 @@ input {
   color: var(--base-100, #f9f9f4);
 }
 
+.alert {
+  display: flex;
+  width: 30rem;
+  padding: 1rem 2rem;
+  align-items: center;
+  gap: 1rem;
+
+  position: absolute;
+  right: 2.5rem;
+  top: 3.75rem;
+
+  border-radius: 1.25rem;
+  background: var(--danger-default, #eb2811);
+
+  color: var(--light-100, #fff);
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%; /* 1.4rem */
+}
+
+.label-error {
+  color: #f00;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 /* dashboard section */
 
 .headline-text {
