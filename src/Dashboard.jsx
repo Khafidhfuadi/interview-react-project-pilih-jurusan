@@ -1,16 +1,52 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  API_BASE_URL,
+  cfAccessClientId,
+  cfAccessClientSecret,
+} from "./constans";
 
-const Dashboard = ({ onLogin }) => {
-  // fetch email from local storage
+import axios from "axios";
+
+const Dashboard = ({ onLogout }) => {
   const email = localStorage.getItem("email");
-  const navigate = useNavigate();
+
+  const [foods, setFoods] = React.useState([]);
+
+  const getFoods = async () => {
+    try {
+      const response = await axios.get("/foods", {
+        baseURL: API_BASE_URL,
+        headers: {
+          "CF-Access-Client-Id": cfAccessClientId,
+          "CF-Access-Client-Secret": cfAccessClientSecret,
+          "Content-Type": "application/json", // Set your desired content type
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      setFoods(response.data.data);
+    } catch (error) {
+      console.error("Get foods failed:", error);
+    }
+  };
+
+  useEffect(() => {
+    getFoods();
+  }, []);
+
+  // formatIDR with remove decimal
+  const formatIDR = (price) => {
+    const formattedPrice = new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(price);
+
+    // Remove the decimal places and the cents from the formatted string
+    return formattedPrice.replace(",00", "");
+  };
 
   // handleLogout
   const handleLogout = () => {
-    localStorage.removeItem("email");
-    localStorage.removeItem("token");
-    onLogin();
+    onLogout();
   };
 
   return (
@@ -36,8 +72,11 @@ const Dashboard = ({ onLogin }) => {
               <div className="foods-list">
                 <p>Daftar Makanan</p>
                 <ul>
-                  <li>Rendang</li>
-                  <li>Ayam Bakar</li>
+                  {foods.map((food) => (
+                    <li key={food.id}>
+                      {food.name} [{formatIDR(food.price)}]
+                    </li>
+                  ))}
                 </ul>
               </div>
               <button onClick={handleLogout} className="btn">

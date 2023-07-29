@@ -1,33 +1,15 @@
 import React from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { axiosLogin } from "./constans";
 
 const Login = ({ onLogin }) => {
   // const { login } = useAuth();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const navigate = useNavigate();
-
-  const API_BASE_URL = "https://interview-api.pilihjurusan.id/";
-
-  const cfAccessClientId = "8853ca70ca342d5659242857edb234de.access";
-  const cfAccessClientSecret =
-    "eec6df88a2637183a3df2171f944a2b58eed7ed645eb368edb51437ee8cdd777";
-
-  // Create an Axios instance with the custom headers
-  const axiosInstance = axios.create({
-    baseURL: API_BASE_URL,
-    headers: {
-      "CF-Access-Client-Id": cfAccessClientId,
-      "CF-Access-Client-Secret": cfAccessClientSecret,
-      "Content-Type": "application/json", // Set your desired content type
-    },
-  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post("/users/authenticate", {
+      const response = await axiosLogin.post("/users/authenticate", {
         email,
         password,
       });
@@ -35,7 +17,6 @@ const Login = ({ onLogin }) => {
       localStorage.setItem("token", token);
       localStorage.setItem("email", email);
       onLogin();
-      // navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
     }
