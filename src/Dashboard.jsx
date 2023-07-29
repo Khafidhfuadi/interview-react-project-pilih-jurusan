@@ -19,7 +19,7 @@ const Dashboard = ({ onLogout }) => {
         headers: {
           "CF-Access-Client-Id": cfAccessClientId,
           "CF-Access-Client-Secret": cfAccessClientSecret,
-          "Content-Type": "application/json", // Set your desired content type
+          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -33,14 +33,12 @@ const Dashboard = ({ onLogout }) => {
     getFoods();
   }, []);
 
-  // formatIDR with remove decimal
   const formatIDR = (price) => {
     const formattedPrice = new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
     }).format(price);
 
-    // Remove the decimal places and the cents from the formatted string
     return formattedPrice.replace(",00", "");
   };
 
@@ -51,6 +49,8 @@ const Dashboard = ({ onLogout }) => {
 
   return (
     <div className="container">
+      <img src="../public/images/logo.png" className="logo" alt="logo" />
+
       <img src="../public/images/line.svg" className="line-bg" alt="line" />
 
       <div className="row justify-content-center">

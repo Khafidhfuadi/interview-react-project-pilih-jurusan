@@ -3,6 +3,17 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+.logo {
+  display: flex;
+  width: 12.375rem;
+  height: 5.25rem;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 6.25rem;
+  top: 3.375rem;
+}
+
 .container {
   display: flex;
   flex-direction: column;

@@ -2,11 +2,9 @@ import React from "react";
 import { axiosLogin } from "./constans";
 
 const Login = ({ onLogin }) => {
-  // const { login } = useAuth();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
-  const [errorEmail, setErrorEmail] = React.useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,6 +38,8 @@ const Login = ({ onLogin }) => {
             ></button>
           </div>
         )}
+
+        <img src="../public/images/logo.png" className="logo" alt="logo" />
 
         <img src="../public/images/line.svg" className="line-bg" alt="line" />
 
