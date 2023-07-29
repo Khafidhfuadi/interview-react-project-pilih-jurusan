@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   // const { login } = useAuth();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -32,8 +32,10 @@ const Login = () => {
         password,
       });
       const { token } = response.data;
+      localStorage.setItem("token", token);
       localStorage.setItem("email", email);
-      navigate("/");
+      onLogin();
+      // navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
     }

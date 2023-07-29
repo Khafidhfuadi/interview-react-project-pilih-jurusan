@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Dashboard = () => {
+const Dashboard = ({ onLogin }) => {
   // fetch email from local storage
   const email = localStorage.getItem("email");
   const navigate = useNavigate();
@@ -10,8 +10,7 @@ const Dashboard = () => {
   const handleLogout = () => {
     localStorage.removeItem("email");
     localStorage.removeItem("token");
-
-    navigate(-1);
+    onLogin();
   };
 
   return (
