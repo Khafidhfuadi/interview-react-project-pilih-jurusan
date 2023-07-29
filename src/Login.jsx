@@ -31,11 +31,7 @@ const Login = () => {
         email,
         password,
       });
-      // Assuming the API returns a token upon successful login
       const { token } = response.data;
-      // Store the token in local storage or a secure cookie
-      localStorage.setItem("token", token);
-      // store email
       localStorage.setItem("email", email);
       navigate("/");
     } catch (error) {
@@ -95,7 +91,7 @@ const Login = () => {
                       placeholder="********"
                     />
                   </div>
-                  <button onClick={handleSubmit} className="btn submit-btn">
+                  <button onClick={handleSubmit} className="btn">
                     Masuk Sekarang
                   </button>
                 </form>

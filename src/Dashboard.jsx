@@ -1,8 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   // fetch email from local storage
   const email = localStorage.getItem("email");
+  const navigate = useNavigate();
+
+  // handleLogout
+  const handleLogout = () => {
+    localStorage.removeItem("email");
+    localStorage.removeItem("token");
+
+    navigate(-1);
+  };
 
   return (
     <div className="container">
@@ -31,6 +41,9 @@ const Dashboard = () => {
                   <li>Ayam Bakar</li>
                 </ul>
               </div>
+              <button onClick={handleLogout} className="btn">
+                Keluar
+              </button>
             </div>
           </div>
         </div>
